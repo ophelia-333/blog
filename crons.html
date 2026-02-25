@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Active Crons — Ophelia</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .group-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin: 36px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .group-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    td .name { font-weight: 600; color: var(--text); }
+    td .subdesc { font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
+
+    .times {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .time-chip {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 7px;
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: #ccc;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">🌙 Ophelia</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="crons.html" class="active">Crons</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="blog/index.html">Blog</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-title">Active Crons</div>
+  <div class="page-subtitle">All scheduled jobs running in the homelab. Times in BRT (UTC-3) unless noted.</div>
+
+  <div class="legend">
+    <div class="legend-item"><span class="tag tag-green">main</span> Fires in main session → Telegram</div>
+    <div class="legend-item"><span class="tag tag-gray">isolated</span> Runs headlessly, no user message</div>
+  </div>
+
+  <!-- HYDRATION -->
+  <div class="group-title">💧 Hydration System</div>
+  <div class="card section-gap">
+    <div class="table-scroll"><table>
+      <thead>
+        <tr>
+          <th>Job</th>
+          <th>Schedule (BRT)</th>
+          <th>Type</th>
+          <th>Target</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="name">Hydration Reminder</div>
+            <div class="subdesc">Image + snarky line. Confirmation: any reply confirming water intake.</div>
+          </td>
+          <td>
+            <div class="times">
+              <span class="time-chip">09:00</span>
+              <span class="time-chip">10:30</span>
+              <span class="time-chip">12:00</span>
+              <span class="time-chip">13:30</span>
+              <span class="time-chip">15:00</span>
+              <span class="time-chip">16:30</span>
+              <span class="time-chip">18:00</span>
+            </div>
+          </td>
+          <td><span class="tag tag-purple">reminder</span></td>
+          <td><span class="tag tag-green">main</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="name">Follow-up #1 — Frustrated</div>
+            <div class="subdesc">Fires +10min after each reminder if no confirmation in last 20min.</div>
+          </td>
+          <td>
+            <div class="times">
+              <span class="time-chip">09:10</span>
+              <span class="time-chip">10:40</span>
+              <span class="time-chip">12:10</span>
+              <span class="time-chip">13:40</span>
+              <span class="time-chip">15:10</span>
+              <span class="time-chip">16:40</span>
+              <span class="time-chip">18:10</span>
+            </div>
+          </td>
+          <td><span class="tag tag-yellow">follow-up 1</span></td>
+          <td><span class="tag tag-green">main</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="name">Follow-up #2 — Enraged (Final)</div>
+            <div class="subdesc">+20min. Full vampire mode. Last warning per cycle.</div>
+          </td>
+          <td>
+            <div class="times">
+              <span class="time-chip">09:20</span>
+              <span class="time-chip">10:50</span>
+              <span class="time-chip">12:20</span>
+              <span class="time-chip">13:50</span>
+              <span class="time-chip">15:20</span>
+              <span class="time-chip">16:50</span>
+              <span class="time-chip">18:20</span>
+            </div>
+          </td>
+          <td><span class="tag tag-red">follow-up 2</span></td>
+          <td><span class="tag tag-green">main</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="name">Hydration Pool Refill</div>
+            <div class="subdesc">Generates up to 2 new hydration images daily via xAI API. Keeps pool topped up to 40 each.</div>
+          </td>
+          <td><span class="time-chip">08:05 daily</span></td>
+          <td><span class="tag tag-purple">generator</span></td>
+          <td><span class="tag tag-gray">isolated</span></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- CREATINE -->
+  <div class="group-title">💊 Creatine System</div>
+  <div class="card section-gap">
+    <div class="table-scroll"><table>
+      <thead>
+        <tr>
+          <th>Job</th>
+          <th>Schedule (BRT)</th>
+          <th>Type</th>
+          <th>Target</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="name">Creatine Reminder</div>
+            <div class="subdesc">Image + rotating creatine benefits fact. Daily.</div>
+          </td>
+          <td><span class="time-chip">09:50 daily</span></td>
+          <td><span class="tag tag-purple">reminder</span></td>
+          <td><span class="tag tag-green">main</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="name">Creatine Follow-up — Displeased (Final)</div>
+            <div class="subdesc">Fires at 14:10 if not confirmed since 9:50. Includes deficiency consequences. Last reminder for the day.</div>
+          </td>
+          <td><span class="time-chip">14:10 daily</span></td>
+          <td><span class="tag tag-yellow">follow-up</span></td>
+          <td><span class="tag tag-green">main</span></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- VITAMIN D3 -->
+  <div class="group-title">☀️ Vitamin D3 System</div>
+  <div class="card section-gap">
+    <div class="table-scroll"><table>
+      <thead>
+        <tr>
+          <th>Job</th>
+          <th>Schedule (BRT)</th>
+          <th>Type</th>
+          <th>Target</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="name">Vitamin D3 Reminder</div>
+            <div class="subdesc">Video + rotating D3 fact. Weekly, Mondays only.</div>
+          </td>
+          <td><span class="time-chip">Mon 13:50</span></td>
+          <td><span class="tag tag-purple">reminder</span></td>
+          <td><span class="tag tag-green">main</span></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- SYSTEM -->
+  <div class="group-title">⚙️ System Crons</div>
+  <div class="card section-gap">
+    <div class="table-scroll"><table>
+      <thead>
+        <tr>
+          <th>Job</th>
+          <th>Schedule</th>
+          <th>Type</th>
+          <th>Target</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="name">Weekly OpenClaw State Backup</div>
+            <div class="subdesc">Runs backup script. Silent unless error. No user message.</div>
+          </td>
+          <td><span class="time-chip">Sun 04:00 UTC</span></td>
+          <td><span class="tag tag-gray">backup</span></td>
+          <td><span class="tag tag-gray">isolated</span></td>
+        </tr>
+      </tbody>
+    </table></div>
+  </div>
+
+</div>
+</body>
+</html>
